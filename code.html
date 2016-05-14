@@ -1,0 +1,110 @@
+<script>
+$(document).ready(function() {
+	var turn = 0, process = "A", lineA = 1, lineB = 1, time = -1;
+
+	refresh();
+
+	$("#reset").click(function() {
+		turn = 0, process = "A", lineA = 1, lineB = 1, time = -1;
+		refresh();
+	});
+
+	$("#run-a").click(function() {
+		process = "A";
+		refresh();
+	});
+
+	$("#run-b").click(function() {
+		process = "B";
+		refresh();
+	});
+
+	$("#next").click(function() {
+		if (process == "A") {
+			if (lineA == 2) {
+				if (turn == 0) {
+					lineA++;
+				}
+			} else if (lineA == 4) {
+				turn = 1;
+				lineA++;
+			} else {
+				lineA < 5 ? lineA++ : lineA = 2;
+			}
+		} else {
+			if (lineB == 2) {
+				if (turn == 1) {
+					lineB++;
+				}
+			} else if (lineB == 4) {
+				turn = 0;
+				lineB++;
+			} else {
+				lineB < 5 ? lineB++ : lineB = 2;
+			}
+		}
+		refresh();
+	});
+
+	function refresh() {
+		$("ol li").css("color", "black");
+		$("#process-a li:nth-child("+lineA+")").css("color", "red");
+		$("#process-b li:nth-child("+lineB+")").css("color", "red");
+
+		$("#turn").text(turn);
+		$("#process").text(process);
+		time++;
+		$("#time").text(time);
+	}
+});
+</script>
+
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <p class="lead">The variable turn current value is: <span id="turn"></span></p>
+    </div>
+    <div class="col-md-4">
+    	<p class="lead">The current process running is: <span id="process"></span></p>
+    </div>
+    <div class="col-md-4">
+    	<p class="lead">The current time is: <span id="time"></span></p>
+    </div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">Process A</div>
+			</div>
+			<div class="panel-body">
+				<pre class="prettyprint lang-c"><ol id="process-a"><li>while (true) {</li><li class="tab-left">while (turn != 0) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 1;</li><li class="tab-left">noncritical_region();</li><li>}</li></ol></pre>
+				<button id="run-a" class="btn btn-default btn-lg center-block">Choose Process A to run</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">Process B</div>
+			</div>
+			<div class="panel-body">
+                <pre class="prettyprint lang-c"><ol id="process-b"><li>while (true) {</li><li class="tab-left">while (turn != 1) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 0;</li><li class="tab-left">noncritical_region();</li><li>}</li></ol></pre>
+                <button id="run-b" class="btn btn-default btn-lg center-block">Choose Process B to run</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-offset-4 col-md-1">
+		<button id="back" class="btn btn-primary btn-lg" disabled="true">Back</button>
+	</div>
+	<div class="col-md-1">
+		<button id="reset" class="btn btn-primary btn-lg">Reset</button>
+	</div>
+	<div class="col-md-1">
+		<button id="next" class="btn btn-primary btn-lg">Next</button>
+	</div>
+</div>
