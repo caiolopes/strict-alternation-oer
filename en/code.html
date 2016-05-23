@@ -1,26 +1,39 @@
 <script>
 $(document).ready(function() {
-	var turn = 0, process = "A", lineA = 1, lineB = 1, time = -1;
+	var turn = 0, process = "-", lineA = 1, lineB = 1, time = -1, stack = [];
 
 	refresh();
+	disableBack();
 
 	$("#reset").click(function() {
-		turn = 0, process = "A", lineA = 1, lineB = 1, time = -1;
+		turn = 0, process = "-", lineA = 1, lineB = 1, time = -1, stack = [];
 		refresh();
 	});
 
 	$("#run-a").click(function() {
 		process = "A";
+		run();
 		refresh();
 	});
 
 	$("#run-b").click(function() {
 		process = "B";
+		run();
 		refresh();
 	});
 
-	$("#next").click(function() {
+	function disableBack() {
+		$("#back").prop("disabled", true);
+	}
+
+	function enableBack() {
+		if (stack.length == 1)
+			$("#back").prop("disabled", false);
+	}
+
+	function run() {
 		if (process == "A") {
+			stack.push({process:"A", turn:turn, line: lineA});
 			if (lineA == 2) {
 				if (turn == 0) {
 					lineA++;
@@ -32,6 +45,7 @@ $(document).ready(function() {
 				lineA < 5 ? lineA++ : lineA = 2;
 			}
 		} else {
+			stack.push({process:"B", turn:turn, line: lineB});
 			if (lineB == 2) {
 				if (turn == 1) {
 					lineB++;
@@ -43,7 +57,26 @@ $(document).ready(function() {
 				lineB < 5 ? lineB++ : lineB = 2;
 			}
 		}
-		refresh();
+		time++;
+
+		enableBack();
+	}
+
+	$("#back").click(function() {
+		if (stack.length > 0) {
+			var info = stack.pop();
+			if (info.process == "A") {
+				lineA = info.line;
+			} else {
+				lineB = info.line;
+			}
+			turn = info.turn;
+
+			time--;
+			refresh();
+		}
+		if (stack.length == 0)
+			disableBack();
 	});
 
 	function refresh() {
@@ -53,7 +86,6 @@ $(document).ready(function() {
 
 		$("#turn").text(turn);
 		$("#process").text(process);
-		time++;
 		$("#time").text(time);
 	}
 });
@@ -62,13 +94,13 @@ $(document).ready(function() {
 
 <div class="row text-center">
     <div class="col-md-4">
-        <p class="lead">The variable turn current value is: <span id="turn"></span></p>
+        <p class="lead">Variable <code>turn</code> is equal to <strong><span id="turn"></span></strong></p>
     </div>
     <div class="col-md-4">
-    	<p class="lead">The current process running is: <span id="process"></span></p>
+    	<p class="lead">The current process running is: <strong><span id="process"></span></strong></p>
     </div>
     <div class="col-md-4">
-    	<p class="lead">The current time is: <span id="time"></span></p>
+    	<p class="lead">Virtual time <small>(just for referance)</small>: <strong><span id="time"></span></strong></p>
     </div>
 </div>
 <div class="row">
@@ -98,13 +130,10 @@ $(document).ready(function() {
 </div>
 
 <div class="row">
-	<div class="col-md-offset-4 col-md-1">
-		<button id="back" class="btn btn-primary btn-lg" disabled="true">Back</button>
+	<div class="col-md-offset-5 col-md-1">
+		<button id="back" class="btn btn-primary btn-lg">Back</button>
 	</div>
 	<div class="col-md-1">
 		<button id="reset" class="btn btn-primary btn-lg">Reset</button>
-	</div>
-	<div class="col-md-1">
-		<button id="next" class="btn btn-primary btn-lg">Next</button>
 	</div>
 </div>
