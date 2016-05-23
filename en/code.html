@@ -37,6 +37,10 @@ $(document).ready(function() {
 			if (lineA == 2) {
 				if (turn == 0) {
 					lineA++;
+					$("#a-spin-lock").text("");
+				} else {
+					// spin lock
+					$("#a-spin-lock").text("is in a spin lock!");
 				}
 			} else if (lineA == 4) {
 				turn = 1;
@@ -49,6 +53,10 @@ $(document).ready(function() {
 			if (lineB == 2) {
 				if (turn == 1) {
 					lineB++;
+					$("#b-spin-lock").text("");
+				} else {
+					// spin lock
+					$("#b-spin-lock").text("is in a spin lock!");
 				}
 			} else if (lineB == 4) {
 				turn = 0;
@@ -107,7 +115,7 @@ $(document).ready(function() {
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process A</div>
+				<div class="panel-title">Process A <span id="a-spin-lock"></span></div>
 			</div>
 			<div class="panel-body">
 				<pre class="prettyprint lang-c"><ol id="process-a"><li>while (true) {</li><li class="tab-left">while (turn != 0) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 1;</li><li class="tab-left">noncritical_region();</li><li>}</li></ol></pre>
@@ -119,7 +127,7 @@ $(document).ready(function() {
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process B</div>
+				<div class="panel-title">Process B <span id="b-spin-lock"></span></div>
 			</div>
 			<div class="panel-body">
                 <pre class="prettyprint lang-c"><ol id="process-b"><li>while (true) {</li><li class="tab-left">while (turn != 1) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 0;</li><li class="tab-left">noncritical_region();</li><li>}</li></ol></pre>
