@@ -88,9 +88,9 @@ $(document).ready(function() {
 	});
 
 	function refresh() {
-		$("ol li").css("color", "black");
-		$("#process-a li:nth-child("+lineA+")").css("color", "red");
-		$("#process-b li:nth-child("+lineB+")").css("color", "red");
+		$("ol li").css("background", "none");
+		$("#process-a li:nth-child("+lineA+")").css("background", "rgba(255,0,0,0.1)");
+		$("#process-b li:nth-child("+lineB+")").css("background", "rgba(255,0,0,0.1)");
 
 		$("#turn").text(turn);
 		$("#process").text(process);
