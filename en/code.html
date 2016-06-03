@@ -95,6 +95,8 @@ $(document).ready(function() {
 		$("#turn").text(turn);
 		$("#process").text(process);
 		$("#time").text(time);
+		$("#a-pc").text(lineA);
+		$("#b-pc").text(lineB);
 	}
 });
 </script>
@@ -115,7 +117,7 @@ $(document).ready(function() {
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process A <span id="a-spin-lock"></span></div>
+				<div class="panel-title">Process A, <span id="a-spin-lock"></span> PC = <span id="a-pc"></span></div>
 			</div>
 			<div class="panel-body">
 				<pre class="prettyprint lang-c"><ol id="process-a"><li>while (true) {</li><li class="tab-left">while (turn != 0) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 1;</li><li class="tab-left">noncritical_region();</li><li style="list-style:none;">}</li></ol></pre>
@@ -127,7 +129,7 @@ $(document).ready(function() {
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process B <span id="b-spin-lock"></span></div>
+				<div class="panel-title">Process B, <span id="b-spin-lock"></span> PC = <span id="b-pc"></span></div>
 			</div>
 			<div class="panel-body">
                 <pre class="prettyprint lang-c"><ol id="process-b"><li>while (true) {</li><li class="tab-left">while (turn != 1) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 0;</li><li class="tab-left">noncritical_region();</li><li style="list-style:none;">}</li></ol></pre>

@@ -22,10 +22,16 @@ $(document).ready(function() {
 			},
 
 			// Pagina incial da explicacao
-			'#start': function() {
+			'#simulator': function() {
 		        $.get("code.html", function(data){
 		            $(".container-fluid").html(data);
 		            prettyPrint();
+		        });
+			},
+			// Pagina incial da explicacao
+			'#animation': function() {
+		        $.get("animation.html", function(data){
+		            $(".container-fluid").html(data);
 		        });
 			}
 		};

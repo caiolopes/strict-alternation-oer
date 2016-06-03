@@ -1,0 +1,129 @@
+<style>
+
+.process-container {
+  margin: 30px;
+  border:1px solid black;
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.critical {
+  display: block;
+  border:1px solid black;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.non-critical {
+  display: block;
+  border:1px solid black;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+span.process-name-1 {
+    animation-name: process-a;
+    display:block;
+    font-size:300%;
+    margin: 10%;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+}
+
+/* Standard syntax */
+@keyframes process-a {
+    from { 
+      margin-left: 10%;
+    }
+    to {
+      margin-left: 80%;
+    }
+}
+
+span.process-name-2 {
+    animation-name: process-b;
+    display:block;
+    font-size:300%;
+    margin: 10%;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+}
+
+
+/* Standard syntax */
+@keyframes process-b {
+    from { 
+      margin-left: 80%;
+    }
+    to {
+      margin-left: 10%;
+    }
+}
+
+.resource {
+  background: green;
+  color: white;
+  width: auto;
+  padding: 3px;
+  height: 20%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+</style>
+
+<script>
+var res1 = $('.resource:eq(0)'),
+res2 = $('.resource:eq(1)');
+
+res2.css("visibility", "hidden");
+setTimeout(hide, 1600);
+
+function hide() {
+  res1.css("visibility", "hidden");
+  res2.css("visibility", "visible");
+  setTimeout(show, 4000);
+}
+
+function show() {
+  res1.css("visibility", "visible");
+  res2.css("visibility", "hidden");
+  setTimeout(hide, 4000);
+}
+
+</script>
+
+<div class='process-container'>
+  <span class="process-name-1">A</span>
+  <div class="non-critical">
+    Critical
+    <div class="resource">Recurso</div>
+  </div>
+    <div class="critical">
+    Non-critical
+  </div>
+</div>
+
+<div class='process-container'>
+  <span class="process-name-2">B</span>
+  <div class="non-critical">
+    Critical
+    <div class="resource">Recurso</div>
+  </div>
+    <div class="critical">
+    Non-critical
+  </div>
+</div>
