@@ -24,7 +24,7 @@
 </style>
 
 <script>
-var resource = 0, timeout; // if equals 0 it is with A, if equals 1 it is with B
+var resource = 0, timeout, lastStepA = 0, lastStepB = 0; // if equals 0 it is with A, if equals 1 it is with B
 
 reset();
 
@@ -61,16 +61,72 @@ function reset() {
 }
 
 $("#runA").click(function () {
+  $("#runA").addClass("btn-primary");
+  $("#runA").removeClass("btn-default");
+  $("#runB").removeClass("btn-primary");
+  $("#runB").addClass("btn-default");
   clearTimeout(timeout);
-  timeout = setTimeout(step8.bind(null, "a"), 2000);
+  goLastStep(lastStepA, "a");
 });
 
 $("#runB").click(function () {
+  $("#runB").addClass("btn-primary");
+  $("#runB").removeClass("btn-default");
+  $("#runA").removeClass("btn-primary");
+  $("#runA").addClass("btn-default");
   clearTimeout(timeout);
-  timeout = setTimeout(step8.bind(null, "b"), 2000);
+  goLastStep(lastStepB, "b");
 });
 
+function goLastStep(lastStep, process) {
+  switch (lastStep) {
+    case 0:
+      timeout = setTimeout(step0.bind(null, process), 2000);
+      break;
+    case 1:
+      timeout = setTimeout(step1.bind(null, process), 2000);
+      break;
+    case 2:
+      timeout = setTimeout(step2.bind(null, process), 2000);
+      break;
+    case 3:
+      timeout = setTimeout(step3.bind(null, process), 2000);
+      break;
+    case 4:
+      timeout = setTimeout(step4.bind(null, process), 2000);
+      break;
+    case 5:
+      timeout = setTimeout(step5.bind(null, process), 2000);
+      break;
+    case 6:
+      timeout = setTimeout(step6.bind(null, process), 2000);
+      break;
+    case 7:
+      timeout = setTimeout(step7.bind(null, process), 2000);
+      break;
+    default:
+      timeout = setTimeout(step8.bind(null, process), 2000);
+      break;
+  }
+}
+
+function setLastStep(process, step) {
+  if (process == "a")
+    lastStepA = step;
+  else if(process == "b")
+    lastStepB = step;
+}
+
+function step0(process) {
+  setLastStep(process, 0);
+  $("#go-"+process+"4").animate({opacity: 0.05}, 1000);
+  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
+  $("#"+process+"1").animate({opacity: 1}, 1000);
+  timeout = setTimeout(step1.bind(null, process), 2000);
+}
+
 function step1(process) {
+  setLastStep(process, 1);
   $("#"+process+"1").animate({opacity: 0.05}, 1000);
   if ((resource == 0 && process == "a") || (resource == 1 && process == "b")) {
     $("#go-"+process+"1").animate({opacity: 1}, 1000);
@@ -89,6 +145,8 @@ function stepRepeat(process) {
 }
 
 function step2(process) {
+  setLastStep(process, 2);
+  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
   $("#go-"+process+"1").animate({opacity: 0.05}, 1000);
   $("#"+process+"2").animate({opacity: 1}, 1000);
 
@@ -96,6 +154,7 @@ function step2(process) {
 }
 
 function step3(process) {
+  setLastStep(process, 3);
   $("#"+process+"2").animate({opacity: 0.05}, 1000);
   $("#go-"+process+"2").animate({opacity: 1}, 1000);
 
@@ -103,18 +162,21 @@ function step3(process) {
 }
 
 function step4(process) {
+  setLastStep(process, 4);
   $("#"+process+"3").animate({opacity: 1}, 1000);
   $("#go-"+process+"2").animate({opacity: 0.05}, 1000);
   timeout = setTimeout(step5.bind(null, process), 2000);
 }
 
 function step5(process) {
+  setLastStep(process, 5);
   $("#"+process+"3").animate({opacity: 0.05}, 1000);
   $("#go-"+process+"3").animate({opacity: 1}, 1000);
   timeout = setTimeout(step6.bind(null, process), 2000);
 }
 
 function step6(process) {
+  setLastStep(process, 6);
   resource = !resource;
   $("#resource-"+process+"").animate({opacity: 0.05}, 1000);
   if (process == "a")
@@ -127,17 +189,10 @@ function step6(process) {
 }
 
 function step7(process) {
+  setLastStep(process, 7);
   $("#"+process+"4").animate({opacity: 0.05}, 1000);
   $("#go-"+process+"4").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step8.bind(null, process), 2000);
-}
-
-
-function step8(process) {
-  $("#go-"+process+"4").animate({opacity: 0.05}, 1000);
-  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
-  $("#"+process+"1").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step1.bind(null, process), 2000);
+  timeout = setTimeout(step0.bind(null, process), 2000);
 }
 
 
@@ -145,7 +200,9 @@ function step8(process) {
 
 <div class="row">
   <div class="col-md-6 col-sm-6 col-xs-6">
-    <p><button id="runA" class="btn btn-primary">Run A</button></p>
+    <p>
+      <button id="runA" class="btn btn-default">Run A</button> &nbsp;
+    </p>
     <div class="panel panel-default">
       <div class="panel-heading">
         Process A
@@ -166,21 +223,21 @@ function step8(process) {
                 <div class="row">
                 <div class="col-xs-4 col-xs-offset-2">
                 <p id="go-a1">
-                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span> Yes</p>
+                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Yes</p>
                 </div>
                 <div class="col-xs-4">
-                  <p id="repeat-a1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:30px;"></span>&nbsp;&nbsp;No, repeat</p>
+                  <p id="repeat-a1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;No, repeat</p>
                 </div>
                 </div>
                 <div id="a2" class="alert alert-danger">Critical region</div>
-                <div id="go-a2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span></div></p>
+                <div id="go-a2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div></p>
                 <div id="a3" class="alert alert-warning">Release resource to process B</div>
-                <div id="go-a3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span></div>
+                <div id="go-a3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div>
                 <div id="a4" class="alert alert-success">Non critical region</div>
               </div>
 
               <div class="col-md-2 col-sm-2 col-xs-2">
-                <p id="go-a4"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" style="font-size:30px;"></span></p>
+                <p id="go-a4"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" style="font-size:20px;"></span></p>
               </div>
           </div>
         </div>
@@ -190,7 +247,7 @@ function step8(process) {
   </div>
 
   <div class="col-md-6 col-sm-6 col-xs-6">
-    <p><button id="runB" class="btn btn-primary">Run B</button></p>
+    <p><button id="runB" class="btn btn-default">Run B</button></p>
     <div class="panel panel-default">
       <div class="panel-heading">
         Process B
@@ -211,21 +268,21 @@ function step8(process) {
                 <div class="row">
                 <div class="col-xs-4 col-xs-offset-2">
                 <p id="go-b1">
-                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span> Yes</p>
+                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Yes</p>
                 </div>
                 <div class="col-xs-4">
-                  <p id="repeat-b1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:30px;"></span>&nbsp;&nbsp;No, repeat</p>
+                  <p id="repeat-b1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;No, repeat</p>
                 </div>
                 </div>
                 <div id="b2" class="alert alert-danger">Critical region</div>
-                <div id="go-b2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span></div></p>
+                <div id="go-b2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div></p>
                 <div id="b3" class="alert alert-warning">Release resource to process B</div>
-                <div id="go-b3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:30px;"></span></div>
+                <div id="go-b3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div>
                 <div id="b4" class="alert alert-success">Non critical region</div>
               </div>
 
               <div class="col-md-2 col-sm-2 col-xs-2">
-                <p id="go-b4"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" style="font-size:30px;"></span></p>
+                <p id="go-b4"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" style="font-size:20px;"></span></p>
               </div>
           </div>
         </div>
