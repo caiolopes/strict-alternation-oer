@@ -26,6 +26,9 @@
 <script>
 var resource = 0, timeout, lastStepA = 0, lastStepB = 0, speed = 0, transitionSpeed = 2000, animationSpeed = 1000; // if equals 0 it is with A, if equals 1 it is with B
 
+  $(".navbar-nav li").removeClass("active");
+  $(".navbar-nav li:eq(2)").addClass("active");
+
 reset();
 
 function reset() {
@@ -219,7 +222,7 @@ function step7(process) {
 </script>
 
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-2 col-md-offset-4">
     <p><button id="speed" class="btn btn-primary">Faster</button></p>
   </div>
     <div class="col-md-2">
@@ -229,7 +232,7 @@ function step7(process) {
 
 <div class="row">
   <div class="col-md-6 col-sm-6 col-xs-6">
-    <p>
+    <p class="text-center">
       <button id="runA" class="btn btn-default">Run A</button> &nbsp;
     </p>
     <div class="panel panel-default">
@@ -276,7 +279,9 @@ function step7(process) {
   </div>
 
   <div class="col-md-6 col-sm-6 col-xs-6">
-    <p><button id="runB" class="btn btn-default">Run B</button></p>
+    <p class="text-center">
+      <button id="runB" class="btn btn-default">Run B</button>
+    </p>
     <div class="panel panel-default">
       <div class="panel-heading">
         Process B
@@ -305,7 +310,7 @@ function step7(process) {
                 </div>
                 <div id="b2" class="alert alert-danger">Critical region</div>
                 <div id="go-b2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div></p>
-                <div id="b3" class="alert alert-warning">Release resource to process B</div>
+                <div id="b3" class="alert alert-warning">Release resource to process A</div>
                 <div id="go-b3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div>
                 <div id="b4" class="alert alert-success">Non critical region</div>
               </div>

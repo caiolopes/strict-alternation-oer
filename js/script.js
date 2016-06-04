@@ -16,21 +16,28 @@ $(document).ready(function() {
 		var map = {
 			// Pagina inicial do app
 			'': function() {
-		        $.get("index.html", function(data){
+		        $.get("start.html", function(data){
 		            $(".container-fluid").html(data);
 		        });
 			},
 
-			// Pagina incial da explicacao
+			// Pagina do simulador
 			'#simulator': function() {
 		        $.get("code.html", function(data){
 		            $(".container-fluid").html(data);
 		            prettyPrint();
 		        });
 			},
-			// Pagina incial da explicacao
+			// Pagina incial da animacao
 			'#animation': function() {
 		        $.get("animation.html", function(data){
+		            $(".container-fluid").html(data);
+		        });
+			},
+
+			// Pagina incial sobre
+			'#about': function() {
+		        $.get("about.html", function(data){
 		            $(".container-fluid").html(data);
 		        });
 			}
