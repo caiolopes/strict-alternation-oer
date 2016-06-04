@@ -72,6 +72,14 @@ $("#speed").click(function() {
   }
 });
 
+$("#stop").click(function() {
+  $("#runA").removeClass("btn-primary");
+  $("#runB").removeClass("btn-primary");
+  $("#runA").addClass("btn-primary");
+  $("#runB").addClass("btn-primary");
+  clearTimeout(timeout);
+});
+
 $("#runA").click(function () {
   $("#runA").addClass("btn-primary");
   $("#runA").removeClass("btn-default");
