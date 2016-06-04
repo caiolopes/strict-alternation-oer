@@ -24,7 +24,7 @@
 </style>
 
 <script>
-var resource = 0, timeout, lastStepA = 0, lastStepB = 0; // if equals 0 it is with A, if equals 1 it is with B
+var resource = 0, timeout, lastStepA = 0, lastStepB = 0, speed = 0, transitionSpeed = 2000, animationSpeed = 1000; // if equals 0 it is with A, if equals 1 it is with B
 
 reset();
 
@@ -60,6 +60,18 @@ function reset() {
   $("#go-b4").css("opacity", "0.05");
 }
 
+$("#speed").click(function() {
+  if (!speed) {
+    $("#speed").text("Slower");
+    transitionSpeed = 1000;
+    animationSpeed = 500;
+  } else {
+    $("#speed").text("Faster");
+    transitionSpeed = 2000;
+    animationSpeed = 1000;
+  }
+});
+
 $("#runA").click(function () {
   $("#runA").addClass("btn-primary");
   $("#runA").removeClass("btn-default");
@@ -81,31 +93,31 @@ $("#runB").click(function () {
 function goLastStep(lastStep, process) {
   switch (lastStep) {
     case 0:
-      timeout = setTimeout(step0.bind(null, process), 2000);
+      timeout = setTimeout(step0.bind(null, process), transitionSpeed);
       break;
     case 1:
-      timeout = setTimeout(step1.bind(null, process), 2000);
+      timeout = setTimeout(step1.bind(null, process), transitionSpeed);
       break;
     case 2:
-      timeout = setTimeout(step2.bind(null, process), 2000);
+      timeout = setTimeout(step2.bind(null, process), transitionSpeed);
       break;
     case 3:
-      timeout = setTimeout(step3.bind(null, process), 2000);
+      timeout = setTimeout(step3.bind(null, process), transitionSpeed);
       break;
     case 4:
-      timeout = setTimeout(step4.bind(null, process), 2000);
+      timeout = setTimeout(step4.bind(null, process), transitionSpeed);
       break;
     case 5:
-      timeout = setTimeout(step5.bind(null, process), 2000);
+      timeout = setTimeout(step5.bind(null, process), transitionSpeed);
       break;
     case 6:
-      timeout = setTimeout(step6.bind(null, process), 2000);
+      timeout = setTimeout(step6.bind(null, process), transitionSpeed);
       break;
     case 7:
-      timeout = setTimeout(step7.bind(null, process), 2000);
+      timeout = setTimeout(step7.bind(null, process), transitionSpeed);
       break;
     default:
-      timeout = setTimeout(step8.bind(null, process), 2000);
+      timeout = setTimeout(step8.bind(null, process), transitionSpeed);
       break;
   }
 }
@@ -119,84 +131,93 @@ function setLastStep(process, step) {
 
 function step0(process) {
   setLastStep(process, 0);
-  $("#go-"+process+"4").animate({opacity: 0.05}, 1000);
-  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
-  $("#"+process+"1").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step1.bind(null, process), 2000);
+  $("#go-"+process+"4").animate({opacity: 0.05}, animationSpeed);
+  $("#repeat-"+process+"1").animate({opacity: 0.05}, animationSpeed);
+  $("#"+process+"1").animate({opacity: 1}, animationSpeed);
+  timeout = setTimeout(step1.bind(null, process), transitionSpeed);
 }
 
 function step1(process) {
   setLastStep(process, 1);
-  $("#"+process+"1").animate({opacity: 0.05}, 1000);
+  $("#"+process+"1").animate({opacity: 0.05}, animationSpeed);
   if ((resource == 0 && process == "a") || (resource == 1 && process == "b")) {
-    $("#go-"+process+"1").animate({opacity: 1}, 1000);
+    $("#go-"+process+"1").animate({opacity: 1}, animationSpeed);
 
-    timeout = setTimeout(step2.bind(null, process), 2000);
+    timeout = setTimeout(step2.bind(null, process), transitionSpeed);
   } else {
-    $("#repeat-"+process+"1").animate({opacity: 1}, 1000);
-    timeout = setTimeout(stepRepeat.bind(null, process), 2000);
+    $("#repeat-"+process+"1").animate({opacity: 1}, animationSpeed);
+    timeout = setTimeout(stepRepeat.bind(null, process), transitionSpeed);
   }
 }
 
 function stepRepeat(process) {
-  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
-  $("#"+process+"1").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step1.bind(null, process), 2000);
+  $("#repeat-"+process+"1").animate({opacity: 0.05}, animationSpeed);
+  $("#"+process+"1").animate({opacity: 1}, animationSpeed);
+  timeout = setTimeout(step1.bind(null, process), transitionSpeed);
 }
 
 function step2(process) {
   setLastStep(process, 2);
-  $("#repeat-"+process+"1").animate({opacity: 0.05}, 1000);
-  $("#go-"+process+"1").animate({opacity: 0.05}, 1000);
-  $("#"+process+"2").animate({opacity: 1}, 1000);
+  $("#repeat-"+process+"1").animate({opacity: 0.05}, animationSpeed);
+  $("#go-"+process+"1").animate({opacity: 0.05}, animationSpeed);
+  $("#"+process+"2").animate({opacity: 1}, animationSpeed);
 
-  timeout = setTimeout(step3.bind(null, process), 2000);
+  timeout = setTimeout(step3.bind(null, process), transitionSpeed);
 }
 
 function step3(process) {
   setLastStep(process, 3);
-  $("#"+process+"2").animate({opacity: 0.05}, 1000);
-  $("#go-"+process+"2").animate({opacity: 1}, 1000);
+  $("#"+process+"2").animate({opacity: 0.05}, animationSpeed);
+  $("#go-"+process+"2").animate({opacity: 1}, animationSpeed);
 
-  timeout = setTimeout(step4.bind(null, process), 2000);
+  timeout = setTimeout(step4.bind(null, process), transitionSpeed);
 }
 
 function step4(process) {
   setLastStep(process, 4);
-  $("#"+process+"3").animate({opacity: 1}, 1000);
-  $("#go-"+process+"2").animate({opacity: 0.05}, 1000);
-  timeout = setTimeout(step5.bind(null, process), 2000);
+  $("#"+process+"3").animate({opacity: 1}, animationSpeed);
+  $("#go-"+process+"2").animate({opacity: 0.05}, animationSpeed);
+  timeout = setTimeout(step5.bind(null, process), transitionSpeed);
 }
 
 function step5(process) {
   setLastStep(process, 5);
-  $("#"+process+"3").animate({opacity: 0.05}, 1000);
-  $("#go-"+process+"3").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step6.bind(null, process), 2000);
+  $("#"+process+"3").animate({opacity: 0.05}, animationSpeed);
+  $("#go-"+process+"3").animate({opacity: 1}, animationSpeed);
+  timeout = setTimeout(step6.bind(null, process), transitionSpeed);
 }
 
 function step6(process) {
   setLastStep(process, 6);
   resource = !resource;
-  $("#resource-"+process+"").animate({opacity: 0.05}, 1000);
+  $("#resource-"+process+"").animate({opacity: 0.05}, animationSpeed);
   if (process == "a")
-    $("#resource-b").animate({opacity: 1}, 1000);
+    $("#resource-b").animate({opacity: 1}, animationSpeed);
   else if (process == "b")
-    $("#resource-a").animate({opacity: 1}, 1000);
-  $("#go-"+process+"3").animate({opacity: 0.05}, 1000);
-  $("#"+process+"4").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step7.bind(null, process), 2000);
+    $("#resource-a").animate({opacity: 1}, animationSpeed);
+  $("#go-"+process+"3").animate({opacity: 0.05}, animationSpeed);
+  $("#"+process+"4").animate({opacity: 1}, animationSpeed);
+  timeout = setTimeout(step7.bind(null, process), transitionSpeed);
 }
 
 function step7(process) {
   setLastStep(process, 7);
-  $("#"+process+"4").animate({opacity: 0.05}, 1000);
-  $("#go-"+process+"4").animate({opacity: 1}, 1000);
-  timeout = setTimeout(step0.bind(null, process), 2000);
+  $("#"+process+"4").animate({opacity: 0.05}, animationSpeed);
+  $("#go-"+process+"4").animate({opacity: 1}, animationSpeed);
+  timeout = setTimeout(step0.bind(null, process), transitionSpeed);
 }
 
 
 </script>
+
+<div class="row">
+  <div class="col-md-2">
+    <p><button id="speed" class="btn btn-primary">Faster</button></p>
+  </div>
+    <div class="col-md-2">
+    <p><button id="stop" class="btn btn-primary">Stop</button></p>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-6 col-sm-6 col-xs-6">
