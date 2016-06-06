@@ -44,7 +44,7 @@ $(document).ready(function() {
 					$("#a-spin-lock").text("");
 				} else {
 					// spin lock
-					$("#a-spin-lock").text("is in a spin lock!");
+					$("#a-spin-lock").text("está em uma trava giratória!");
 				}
 			} else if (lineA == 4) {
 				turn = 1;
@@ -60,7 +60,7 @@ $(document).ready(function() {
 					$("#b-spin-lock").text("");
 				} else {
 					// spin lock
-					$("#b-spin-lock").text("is in a spin lock!");
+					$("#b-spin-lock").text("está em uma trava giratória!");
 				}
 			} else if (lineB == 4) {
 				turn = 0;
@@ -108,24 +108,24 @@ $(document).ready(function() {
 
 <div class="row text-center">
     <div class="col-md-4">
-        <p class="lead">Variable <code>turn</code> is equal to <strong><span id="turn"></span></strong></p>
+        <p class="lead">Variável <code>turn</code> é igual a <strong><span id="turn"></span></strong></p>
     </div>
     <div class="col-md-4">
-    	<p class="lead">The current process running is: <strong><span id="process"></span></strong></p>
+    	<p class="lead">O seguinte processo está executando: <strong><span id="process"></span></strong></p>
     </div>
     <div class="col-md-4">
-    	<p class="lead">Virtual time <small>(just for referance)</small>: <strong><span id="time"></span></strong></p>
+    	<p class="lead">Tempo virtual <small>(somente para referência)</small>: <strong><span id="time"></span></strong></p>
     </div>
 </div>
 <div class="row">
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process A, <span id="a-spin-lock"></span> PC = <span id="a-pc"></span></div>
+				<div class="panel-title">Processo A, <span id="a-spin-lock"></span> PC = <span id="a-pc"></span></div>
 			</div>
 			<div class="panel-body">
 				<pre class="prettyprint lang-c"><ol id="process-a"><li>while (true) {</li><li class="tab-left">while (turn != 0) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 1;</li><li class="tab-left">noncritical_region();</li><li style="list-style:none;">}</li></ol></pre>
-				<button id="run-a" class="btn btn-default btn-lg center-block">Choose Process A to run</button>
+				<button id="run-a" class="btn btn-default btn-lg center-block">Escolha o Processo A para executar</button>
 			</div>
 		</div>
 	</div>
@@ -133,11 +133,11 @@ $(document).ready(function() {
 	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Process B, <span id="b-spin-lock"></span> PC = <span id="b-pc"></span></div>
+				<div class="panel-title">Processo B, <span id="b-spin-lock"></span> PC = <span id="b-pc"></span></div>
 			</div>
 			<div class="panel-body">
                 <pre class="prettyprint lang-c"><ol id="process-b"><li>while (true) {</li><li class="tab-left">while (turn != 1) /* loop */ ;</li><li class="tab-left">critical_region();</li><li class="tab-left">turn = 0;</li><li class="tab-left">noncritical_region();</li><li style="list-style:none;">}</li></ol></pre>
-                <button id="run-b" class="btn btn-default btn-lg center-block">Choose Process B to run</button>
+                <button id="run-b" class="btn btn-default btn-lg center-block">Escolha o Processo B para executar</button>
 			</div>
 		</div>
 	</div>
@@ -145,9 +145,9 @@ $(document).ready(function() {
 
 <div class="row">
 	<div class="col-md-offset-5 col-md-1">
-		<button id="back" class="btn btn-primary btn-lg">Back</button>
+		<button id="back" class="btn btn-primary btn-lg">Voltar</button>
 	</div>
 	<div class="col-md-1">
-		<button id="reset" class="btn btn-primary btn-lg">Reset</button>
+		<button id="reset" class="btn btn-primary btn-lg">Reiniciar</button>
 	</div>
 </div>
