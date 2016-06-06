@@ -22,7 +22,7 @@ $(document).ready(function() {
 			},
 			// Pagina do simulador
 			'#learn': function() {
-		        $.get("learn.html", function(data){
+		        $.get("learn-frame.html", function(data){
 		            $(".container-fluid").html(data);
 		        });
 			},
