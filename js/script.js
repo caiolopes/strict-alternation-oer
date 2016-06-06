@@ -20,7 +20,12 @@ $(document).ready(function() {
 		            $(".container-fluid").html(data);
 		        });
 			},
-
+			// Pagina do simulador
+			'#learn': function() {
+		        $.get("learn.html", function(data){
+		            $(".container-fluid").html(data);
+		        });
+			},
 			// Pagina do simulador
 			'#simulator': function() {
 		        $.get("code.html", function(data){
