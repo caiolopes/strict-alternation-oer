@@ -65,11 +65,11 @@ function reset() {
 
 $("#speed").click(function() {
   if (!speed) {
-    $("#speed").text("Slower");
+    $("#speed").text("Lento");
     transitionSpeed = 1000;
     animationSpeed = 500;
   } else {
-    $("#speed").text("Faster");
+    $("#speed").text("Rápido");
     transitionSpeed = 2000;
     animationSpeed = 1000;
   }
@@ -223,49 +223,49 @@ function step7(process) {
 
 <div class="row">
   <div class="col-md-2 col-md-offset-4">
-    <p><button id="speed" class="btn btn-primary">Faster</button></p>
+    <p><button id="speed" class="btn btn-primary">Rápido</button></p>
   </div>
     <div class="col-md-2">
-    <p><button id="stop" class="btn btn-primary">Stop</button></p>
+    <p><button id="stop" class="btn btn-primary">Parar</button></p>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-sm-6 col-xs-6">
     <p class="text-center">
-      <button id="runA" class="btn btn-default">Run A</button> &nbsp;
+      <button id="runA" class="btn btn-default">Executa A</button> &nbsp;
     </p>
     <div class="panel panel-default">
       <div class="panel-heading">
-        Process A
+        Processo A
       </div>
       <div class="panel-body">
         <div class="panel panel-primary">
-          <div class="panel-heading">Shared resources</div>
+          <div class="panel-heading">Recursos Compartilhados</div>
             <div class="panel-body">
-              <div id="resource-a" class="well well-sm">Resource</div>
+              <div id="resource-a" class="well well-sm">Recursos</div>
             </div>
         </div>
         <div class="panel panel-primary">
-          <div class="panel-heading">Infinite loop</div>
+          <div class="panel-heading">Loop infinito</div>
             <div class="panel-body">
             <div class="row row-xs-flex-center">
               <div class="col-md-10 col-sm-10 col-xs-10">
-                <div id="a1" class="alert alert-info">Do I have the resource?</div>
+                <div id="a1" class="alert alert-info">Eu tenho o recurso?</div>
                 <div class="row">
                 <div class="col-xs-4 col-xs-offset-2">
                 <p id="go-a1">
-                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Yes</p>
+                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Sim</p>
                 </div>
                 <div class="col-xs-4">
-                  <p id="repeat-a1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;No, repeat</p>
+                  <p id="repeat-a1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;Não, repete</p>
                 </div>
                 </div>
-                <div id="a2" class="alert alert-danger">Critical region</div>
+                <div id="a2" class="alert alert-danger">Região crítica</div>
                 <div id="go-a2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div></p>
-                <div id="a3" class="alert alert-warning">Release resource to process B</div>
+                <div id="a3" class="alert alert-warning">Libera o recurso para o processo B</div>
                 <div id="go-a3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div>
-                <div id="a4" class="alert alert-success">Non critical region</div>
+                <div id="a4" class="alert alert-success">Região não crítica</div>
               </div>
 
               <div class="col-md-2 col-sm-2 col-xs-2">
@@ -280,39 +280,39 @@ function step7(process) {
 
   <div class="col-md-6 col-sm-6 col-xs-6">
     <p class="text-center">
-      <button id="runB" class="btn btn-default">Run B</button>
+      <button id="runB" class="btn btn-default">Executa B</button>
     </p>
     <div class="panel panel-default">
       <div class="panel-heading">
-        Process B
+        Processo B
       </div>
       <div class="panel-body">
         <div class="panel panel-primary">
-          <div class="panel-heading">Shared resources</div>
+          <div class="panel-heading">Recursos Compartilhados</div>
             <div class="panel-body">
-              <div id="resource-b" class="well well-sm">Resource</div>
+              <div id="resource-b" class="well well-sm">Recursos</div>
             </div>
         </div>
         <div class="panel panel-primary">
-          <div class="panel-heading">Infinite loop</div>
+          <div class="panel-heading">Loop infinito</div>
             <div class="panel-body">
             <div class="row row-xs-flex-center">
               <div class="col-md-10 col-sm-10 col-xs-10">
-                <div id="b1" class="alert alert-info">Do I have the resource?</div>
+                <div id="b1" class="alert alert-info">Eu tenho o recurso?</div>
                 <div class="row">
                 <div class="col-xs-4 col-xs-offset-2">
                 <p id="go-b1">
-                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Yes</p>
+                  <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span> Sim</p>
                 </div>
                 <div class="col-xs-4">
-                  <p id="repeat-b1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;No, repeat</p>
+                  <p id="repeat-b1"><span class="glyphicon glyphicon-repeat" aria-hidden="true" style="font-size:20px;"></span>&nbsp;&nbsp;Não, repete</p>
                 </div>
                 </div>
-                <div id="b2" class="alert alert-danger">Critical region</div>
+                <div id="b2" class="alert alert-danger">Região crítica</div>
                 <div id="go-b2" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div></p>
-                <div id="b3" class="alert alert-warning">Release resource to process A</div>
+                <div id="b3" class="alert alert-warning">Libera o recurso para o processo A</div>
                 <div id="go-b3" class="text-center"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" style="font-size:20px;"></span></div>
-                <div id="b4" class="alert alert-success">Non critical region</div>
+                <div id="b4" class="alert alert-success">Região não crítica</div>
               </div>
 
               <div class="col-md-2 col-sm-2 col-xs-2">
